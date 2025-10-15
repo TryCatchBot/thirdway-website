@@ -339,7 +339,7 @@ export default function PropertyDetailsPage({ params }: { params: Promise<{ id: 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Back to Properties
+            Back to Properties...
           </motion.button>
         </div>
       </section>
