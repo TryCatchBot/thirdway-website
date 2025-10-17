@@ -333,13 +333,13 @@ export default function PropertyDetailsPage({ params }: { params: Promise<{ id: 
           <motion.button
             onClick={() => {
               console.log('Button clicked - navigating to /explore');
-              router.push('/explore');
+              window.location.href = '/explore';
             }}
-            className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors duration-300"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Back to Properties...
+            Back to Properties
           </motion.button>
         </div>
       </section>

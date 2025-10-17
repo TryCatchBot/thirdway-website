@@ -66,7 +66,7 @@ export default function InspectionBooking() {
           </p>
           <button
             onClick={() => setIsSubmitted(false)}
-            className="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 transition-colors duration-300"
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
           >
             Book Another Inspection
           </button>
@@ -78,7 +78,7 @@ export default function InspectionBooking() {
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-black via-gray-900 to-teal-900 text-white py-20">
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -122,7 +122,7 @@ export default function InspectionBooking() {
                     required
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -138,7 +138,7 @@ export default function InspectionBooking() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -154,7 +154,7 @@ export default function InspectionBooking() {
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="+234 906 201 9993"
                   />
                 </div>
@@ -169,7 +169,7 @@ export default function InspectionBooking() {
                     required
                     value={formData.propertyType}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select property type</option>
                     {propertyTypes.map((type) => (
@@ -191,7 +191,7 @@ export default function InspectionBooking() {
                     required
                     value={formData.preferredDate}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -205,7 +205,7 @@ export default function InspectionBooking() {
                     required
                     value={formData.preferredTime}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select time slot</option>
                     {timeSlots.map((time) => (
@@ -228,7 +228,7 @@ export default function InspectionBooking() {
                   required
                   value={formData.location}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Enter property address or location"
                 />
               </div>
@@ -243,7 +243,7 @@ export default function InspectionBooking() {
                   rows={4}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Any specific requirements or questions..."
                 />
               </div>
@@ -251,7 +251,7 @@ export default function InspectionBooking() {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="bg-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
+                  className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
                 >
                   Book Inspection
                 </button>
@@ -330,13 +330,13 @@ export default function InspectionBooking() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+2349062019993"
-                className="bg-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-300"
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
               >
                 📞 +234 906 201 9993
               </a>
               <a
                 href="mailto:info@thirdway.com"
-                className="border-2 border-teal-600 text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-teal-600 hover:text-white transition-colors duration-300"
+                className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors duration-300"
               >
                 ✉️ info@thirdway.com
               </a>

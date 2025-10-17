@@ -1,429 +1,370 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 
 export default function ThirdWaferers() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  const categories = [
-    { id: 'all', name: 'All Consultants' },
-    { id: 'residential', name: 'Residential' },
-    { id: 'commercial', name: 'Commercial' },
-    { id: 'legal', name: 'Legal' },
-    { id: 'investment', name: 'Investment' },
-  ];
-
-  const consultants = [
-    {
-      id: 1,
-      name: 'Adebayo Lawal',
-      title: 'Senior Real Estate Consultant',
-      category: 'residential',
-      experience: '8+ years',
-      specialization: 'Residential Properties, Luxury Homes',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80',
-      rating: 4.9,
-      clients: 150,
-      description: 'Expert in residential property transactions with a focus on luxury homes and family properties.',
-      achievements: ['Top Performer 2023', 'Client Satisfaction Award', 'Sales Excellence']
-    },
-    {
-      id: 2,
-      name: 'Lukman Shobowale',
-      title: 'Commercial Real Estate Specialist',
-      category: 'commercial',
-      experience: '10+ years',
-      specialization: 'Office Spaces, Retail Properties',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
-      rating: 4.8,
-      clients: 200,
-      description: 'Specializes in commercial real estate transactions and investment opportunities.',
-      achievements: ['Commercial Expert', 'Investment Advisor', 'Market Analyst']
-    },
-    {
-      id: 3,
-      name: 'Emmanuel Taiwo',
-      title: 'Legal Real Estate Advisor',
-      category: 'legal',
-      experience: '12+ years',
-      specialization: 'Property Law, Due Diligence',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80',
-      rating: 4.9,
-      clients: 300,
-      description: 'Legal expert specializing in property transactions, contracts, and regulatory compliance.',
-      achievements: ['Legal Excellence', 'Compliance Expert', 'Risk Management']
-    },
-    {
-      id: 4,
-      name: 'Kehinde Afolayan',
-      title: 'Investment Real Estate Consultant',
-      category: 'investment',
-      experience: '7+ years',
-      specialization: 'Real Estate Investment, Portfolio Management',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80',
-      rating: 4.7,
-      clients: 120,
-      description: 'Investment specialist helping clients build wealth through strategic real estate investments.',
-      achievements: ['Investment Guru', 'Portfolio Manager', 'Wealth Builder']
-    },
-    {
-      id: 5,
-      name: 'Abalaka Deborah',
-      title: 'Customer Service Lead',
-      category: 'residential',
-      experience: '5+ years',
-      specialization: 'Client Relations, Property Management',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
-      rating: 4.8,
-      clients: 180,
-      description: 'Dedicated to providing exceptional customer service and ensuring client satisfaction.',
-      achievements: ['Customer Champion', 'Service Excellence', 'Client Relations']
-    },
-    {
-      id: 6,
-      name: 'Chinedu Okonkwo',
-      title: 'Land Development Specialist',
-      category: 'commercial',
-      experience: '9+ years',
-      specialization: 'Land Acquisition, Development Projects',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80',
-      rating: 4.6,
-      clients: 90,
-      description: 'Expert in land development projects and large-scale property acquisitions.',
-      achievements: ['Development Expert', 'Land Specialist', 'Project Manager']
-    }
-  ];
-
-  const filteredConsultants = selectedCategory === 'all' 
-    ? consultants 
-    : consultants.filter(consultant => consultant.category === selectedCategory);
+  const [hoveredValue, setHoveredValue] = useState<number | null>(null);
+  const [clickedValue, setClickedValue] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
 
   const coreValues = [
     {
-      icon: '🤝',
       title: 'Integrity',
-      description: 'We keep our promises and agreements. We are honest, trustworthy and ethical in all our actions.'
+      description: 'We keep our promises and agreements. We are honest, trustworthy and ethical in our all actions.',
+      icon: '🤝',
+      color: 'from-green-500 to-green-600'
     },
     {
-      icon: '🔄',
       title: 'Versatility',
-      description: 'We are professional and adaptable to the varied needs of our clients.'
+      description: 'We are professional and adaptable to the varied needs of our clients.',
+      icon: '🔄',
+      color: 'from-blue-500 to-blue-600'
     },
     {
-      icon: '👥',
       title: 'Team Work',
-      description: 'We are committed to achieving common goals as a team.'
+      description: 'We are committed to achieving common goals as a team.',
+      icon: '👥',
+      color: 'from-purple-500 to-purple-600'
     },
     {
+      title: 'Prompt delivery',
+      description: 'We are prompt with allocation of assets and payment of returns on Investment.',
       icon: '⚡',
-      title: 'Prompt Delivery',
-      description: 'We are prompt with allocation of assets and payment of returns on Investment.'
+      color: 'from-orange-500 to-orange-600'
     }
   ];
 
+  const handleValueClick = (index: number) => {
+    setClickedValue(clickedValue === index ? null : index);
+    // You can add more functionality here like opening a modal or navigating to a section
+  };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      message: ''
+    });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Form submitted:', formData);
+    // You can add API call here
+    alert('Thank you for your interest! We will contact you soon.');
+    handleModalClose();
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 pt-16">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-black via-gray-900 to-teal-900 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              ThirdWaferers Real Estate Consultants
+    <div className="min-h-screen bg-white">
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out;
+        }
+      `}</style>
+      {/* Hero Section - matches Dukiya exactly */}
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-16">
+        {/* <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Build your dream house
             </h1>
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-8">
-              Expert real estate consultants dedicated to helping you make informed property decisions and achieve your investment goals.
-            </p>
-            <button className="bg-white text-black px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300">
-              Get Consultation
+            <p className="text-xl mb-8">Get in Touch</p>
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold">ThirdWay</h2>
+              <p className="text-lg">+234 906 201 9993</p>
+            </div>
+          </div>
+        </div> */}
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Are you looking for a way to earn money as you work a 9-5?
+          </h2>
+          <p className="text-xl text-gray-100 mb-8">
+            Earn commission when you refer our products to your community. Join the ThirdWaferers.
+          </p>
+          <button 
+            onClick={handleModalOpen}
+            className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-lg"
+          >
+            Register Now
             </button>
-          </motion.div>
         </div>
       </section>
 
-      {/* Core Values Section */}
+      {/* Main CTA Section - matches Dukiya exactly */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        {/* <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Are you looking for a way to earn money as you work a 9-5?
+          </h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Earn commission when you refer our products to your community. Join the ThirdWaferers.
+          </p>
+          <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-lg">
+            Register Now
+          </button>
+        </div> */}
+      </section>
+
+      {/* Core Values Section - Interactive */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
               Our Core Values
             </h2>
-          </motion.div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {coreValues.map((value, index) => (
-              <motion.div
+              <div 
                 key={value.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="text-center"
+                className={`text-center bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group border-2 ${
+                  clickedValue === index 
+                    ? 'border-blue-500 shadow-xl scale-105' 
+                    : 'border-gray-200 hover:border-blue-500'
+                }`}
+                onMouseEnter={() => setHoveredValue(index)}
+                onMouseLeave={() => setHoveredValue(null)}
+                onClick={() => handleValueClick(index)}
               >
-                <div className="text-4xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                <div className="mb-4">
+                  <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center transition-all duration-300 ${
+                    clickedValue === index 
+                      ? `bg-gradient-to-r ${value.color} shadow-lg` 
+                      : 'bg-gray-100 group-hover:bg-blue-100'
+                  }`}>
+                    <span className={`text-2xl transition-all duration-300 ${
+                      clickedValue === index 
+                        ? 'text-white scale-110' 
+                        : 'text-gray-600 group-hover:text-blue-600'
+                    }`}>
+                      {value.icon}
+                    </span>
+                  </div>
+                </div>
+                <h3 className={`text-xl font-bold mb-4 transition-colors duration-300 ${
+                  clickedValue === index 
+                    ? 'text-blue-600' 
+                    : 'text-gray-900 group-hover:text-blue-600'
+                }`}>
                   {value.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className={`transition-colors duration-300 ${
+                  clickedValue === index 
+                    ? 'text-gray-800' 
+                    : 'text-gray-600 group-hover:text-gray-800'
+                }`}>
                   {value.description}
                 </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Filter Section */}
-      <section className="py-8 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  selectedCategory === category.id
-                    ? 'bg-teal-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Consultants Grid */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {filteredConsultants.map((consultant, index) => (
-              <motion.div
-                key={consultant.id}
-                layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="relative h-64">
-                  <Image
-                    src={consultant.image}
-                    alt={consultant.name}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-4 right-4 bg-teal-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {consultant.experience}
+                
+                {/* Progress bar that appears on hover/click */}
+                <div className={`mt-4 transition-opacity duration-300 ${
+                  hoveredValue === index || clickedValue === index ? 'opacity-100' : 'opacity-0'
+                }`}>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className={`h-2 rounded-full transition-all duration-1000 ${
+                        clickedValue === index 
+                          ? `bg-gradient-to-r ${value.color}` 
+                          : 'bg-blue-500'
+                      }`}
+                      style={{
+                        width: hoveredValue === index || clickedValue === index ? '100%' : '0%'
+                      }}
+                    ></div>
                   </div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
-                    {consultant.name}
-                  </h3>
-                  <p className="text-teal-600 font-medium mb-2">
-                    {consultant.title}
-                  </p>
-                  <p className="text-gray-600 mb-4">
-                    {consultant.specialization}
-                  </p>
-                  
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center">
-                      <span className="text-yellow-500 mr-1">⭐</span>
-                      <span className="text-gray-700 font-medium">
-                        {consultant.rating}
-                      </span>
-                    </div>
-                    <span className="text-gray-500">
-                      {consultant.clients} clients
-                    </span>
+                {/* Click indicator */}
+                {clickedValue === index && (
+                  <div className="mt-3 text-sm text-blue-600 font-medium animate-pulse">
+                    ✓ Selected
                   </div>
-                  
-                  <p className="text-gray-600 text-sm mb-4">
-                    {consultant.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {consultant.achievements.map((achievement, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-teal-100 text-teal-700 px-2 py-1 rounded text-xs"
-                      >
-                        {achievement}
-                      </span>
+                )}
+              </div>
                     ))}
                   </div>
                   
-                  <div className="flex space-x-3">
-                    <button className="flex-1 bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors duration-300">
-                      Book Consultation
-                    </button>
-                    <button className="flex-1 border border-teal-600 text-teal-600 py-2 px-4 rounded-lg hover:bg-teal-600 hover:text-white transition-colors duration-300">
-                      View Profile
+          {/* Selected value details */}
+          {clickedValue !== null && (
+            <div className="mt-12 bg-white rounded-lg shadow-lg p-8 border border-blue-200 animate-fadeIn">
+              <div className="text-center">
+                <div className="text-4xl mb-4">{coreValues[clickedValue].icon}</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {coreValues[clickedValue].title}
+                </h3>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  {coreValues[clickedValue].description}
+                </p>
+                <button 
+                  onClick={() => setClickedValue(null)}
+                  className="mt-6 px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300"
+                >
+                  Close
                     </button>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          )}
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+      {/* ThirdWaferers Section - matches Dukiya exactly */}
+      <section className="py-16 bg-gray-100 text-gray-900">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Be a part of #ThirdWaferers
+          </h2>
+          <p className="text-xl mb-8 max-w-3xl mx-auto">
+            ThirdWay's mission is To build strong, long term and proactive relationships with clients by creating exceptional real estate investments and delivering best results. You want to be part of this dream? Join us!
+          </p>
+          <button 
+            onClick={handleModalOpen}
+            className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 text-lg"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Consulting Services
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive real estate consulting services to help you make informed decisions.
-            </p>
-          </motion.div>
+            Join us
+          </button>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: '🏠',
-                title: 'Property Valuation',
-                description: 'Accurate property assessments and market value analysis.'
-              },
-              {
-                icon: '📊',
-                title: 'Market Analysis',
-                description: 'In-depth market research and investment opportunity analysis.'
-              },
-              {
-                icon: '📋',
-                title: 'Due Diligence',
-                description: 'Comprehensive property inspection and legal verification.'
-              },
-              {
-                icon: '💰',
-                title: 'Investment Advisory',
-                description: 'Strategic investment planning and portfolio management.'
-              },
-              {
-                icon: '📝',
-                title: 'Legal Consultation',
-                description: 'Property law advice and transaction documentation.'
-              },
-              {
-                icon: '🤝',
-                title: 'Negotiation Support',
-                description: 'Expert negotiation to secure the best deals.'
-              }
-            ].map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="text-center p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-300"
-              >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600">
-                  {service.description}
+
+
+      {/* Contact Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">Join ThirdWaferers</h2>
+                <button
+                  onClick={handleModalClose}
+                  className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your email address"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                    Tell us about yourself
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Why are you interested in joining ThirdWaferers?"
+                  />
+                </div>
+                
+                <div className="flex space-x-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={handleModalClose}
+                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  >
+                    Submit Application
+                  </button>
+                </div>
+              </form>
+              
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-600">
+                  By submitting this form, you agree to our terms and conditions.
                 </p>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-teal-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Work with Our Experts?
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Book a consultation with our real estate consultants and get expert advice for your property needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300">
-                Book Consultation
-              </button>
-              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-teal-600 transition-colors duration-300">
-                View Services
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-16 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              Get in Touch with Our Consultants
-            </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Our team maintains subtle accessibility and working relationships which guarantee our clients full-time attention whenever they need our help.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <div className="bg-white p-6 rounded-lg shadow-lg">
-                <div className="text-3xl mb-4">📞</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  Call Us or Send Text
-                </h3>
-                <p className="text-teal-600 font-semibold mb-2">
-                  +234 906 201 9993
-                </p>
-                <p className="text-gray-600 text-sm">
-                  Get reply immediately
-                </p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-lg">
-                <div className="text-3xl mb-4">✉️</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  Email Us
-                </h3>
-                <p className="text-teal-600 font-semibold mb-2">
-                  info@thirdway.com
-                </p>
-                <p className="text-gray-600 text-sm">
-                  Get reply within 24hrs
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      )}
     </div>
   );
 }

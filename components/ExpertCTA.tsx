@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function ExpertCTA() {
   return (
     <motion.div 
-      className="bg-blue-500 text-white text-center py-3 px-4 fixed top-0 left-0 right-0 z-50"
+      className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white text-center py-3 px-4 fixed top-0 left-0 right-0 z-50"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

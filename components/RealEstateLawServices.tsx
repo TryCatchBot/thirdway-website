@@ -61,8 +61,8 @@ export default function RealEstateLawServices() {
       title: 'Perfection of Title',
       description: 'Professional title perfection services to ensure clear and marketable property titles.',
       icon: '✅',
-      color: 'from-teal-500 to-teal-600',
-      bgGradient: 'from-teal-50 to-teal-100',
+      color: 'from-blue-500 to-blue-600',
+      bgGradient: 'from-blue-50 to-blue-100',
       slug: 'perfection-of-title'
     },
     {

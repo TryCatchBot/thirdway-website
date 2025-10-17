@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import colors from './Colors';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const menuItems = [
     { name: 'Explore Properties', href: '/explore' },
@@ -41,19 +43,28 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-blue-500 transition-colors duration-300 relative group"
-              >
-                {item.name}
-                <motion.div
-                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"
-                  whileHover={{ width: '100%' }}
-                />
-              </Link>
-            ))}
+            {menuItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-gray-700 hover:text-blue-500 transition-colors duration-300 relative group ${
+                    isActive ? 'text-blue-500' : ''
+                  }`}
+                >
+                  {item.name}
+                  <motion.div
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-blue-500 transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                    initial={{ width: isActive ? '100%' : '0%' }}
+                    animate={{ width: isActive ? '100%' : '0%' }}
+                    whileHover={{ width: '100%' }}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
 
@@ -99,22 +110,29 @@ export default function Navbar() {
               className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-lg"
             >
               <div className="px-4 py-6 space-y-4">
-                {menuItems.map((item, index) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block text-gray-700 hover:text-blue-500 transition-colors duration-300 py-2"
+                {menuItems.map((item, index) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
                     >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block transition-colors duration-300 py-2 ${
+                          isActive 
+                            ? 'text-blue-500 font-medium' 
+                            : 'text-gray-700 hover:text-blue-500'
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
                 
               </div>
             </motion.div>
