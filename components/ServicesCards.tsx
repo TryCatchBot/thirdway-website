@@ -457,7 +457,7 @@ export default function ServicesCards() {
                           {/* Contact Button */}
                           <motion.button
                             onClick={() => setIsModalOpen(true)}
-                            className="w-full bg-green-500 text-white px-4 py-3 rounded-lg font-bold hover:bg-green-600 transition-colors duration-300 text-sm flex items-center justify-center gap-2"
+                            className="w-full bg-blue-500 text-white px-4 py-3 rounded-lg font-bold hover:bg-blue-600 transition-colors duration-300 text-sm flex items-center justify-center gap-2"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -568,7 +568,7 @@ export default function ServicesCards() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-300"
+                  className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
                 >
                   Send Message
                 </button>

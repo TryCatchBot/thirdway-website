@@ -20,7 +20,7 @@ export default function Hero() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-slate-900 via-black to-teal-900"
+        className="absolute inset-0 bg-gradient-to-br from-slate-900 via-black to-blue-900"
         initial={{ scale: 1.1, opacity: 0.8 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2, ease: "easeOut" }}

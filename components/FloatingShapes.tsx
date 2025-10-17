@@ -24,7 +24,7 @@ export default function FloatingShapes({ className = '' }: FloatingShapesProps) 
     {
       id: 2,
       size: 'w-12 h-12',
-      color: 'bg-teal-400/20',
+      color: 'bg-blue-400/20',
       position: 'top-40 right-20',
       animation: {
         y: [0, 30, 0],
@@ -48,7 +48,7 @@ export default function FloatingShapes({ className = '' }: FloatingShapesProps) 
     {
       id: 4,
       size: 'w-20 h-20',
-      color: 'bg-teal-300/15',
+      color: 'bg-blue-300/15',
       position: 'bottom-20 right-10',
       animation: {
         y: [0, 25, 0],

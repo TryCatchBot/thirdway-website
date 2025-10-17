@@ -74,7 +74,7 @@ export default function ExploreProperties() {
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-black via-gray-900 to-teal-900 text-white py-20">
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -102,7 +102,7 @@ export default function ExploreProperties() {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                   selectedCategory === category.id
-                    ? 'bg-teal-600 text-white shadow-lg'
+                    ? 'bg-blue-600 text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
@@ -150,7 +150,7 @@ export default function ExploreProperties() {
                   
                   {/* Property Type - Right */}
                   <div className="absolute top-4 right-4">
-                    <span className="bg-teal-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                       {property.type ? property.type.charAt(0).toUpperCase() + property.type.slice(1) : 'Property'}
                     </span>
                   </div>
@@ -165,7 +165,7 @@ export default function ExploreProperties() {
                   </p>
                   
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-bold text-teal-600">
+                    <span className="text-2xl font-bold text-blue-600">
                       {property.price || 'Price on Request'}
                     </span>
                     <span className="text-gray-500">
@@ -194,7 +194,7 @@ export default function ExploreProperties() {
                   <div className="flex space-x-3">
                     <button 
                       onClick={() => window.location.href = `/property/${property.id}`}
-                      className="flex-1 bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition-colors duration-300"
+                      className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
                     >
                       View Details
                     </button>
@@ -204,7 +204,7 @@ export default function ExploreProperties() {
                         setInspectionData(prev => ({ ...prev, property: property.name }));
                         setIsInspectionModalOpen(true);
                       }}
-                      className="flex-1 border border-teal-600 text-teal-600 py-2 px-4 rounded-lg hover:bg-teal-600 hover:text-white transition-colors duration-300"
+                      className="flex-1 border border-blue-600 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
                     >
                       Book Inspection
                     </button>
@@ -217,7 +217,7 @@ export default function ExploreProperties() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-teal-600 text-white py-16">
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -233,13 +233,13 @@ export default function ExploreProperties() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
+                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
               >
                 Contact Sales
               </button>
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-teal-600 transition-colors duration-300"
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors duration-300"
               >
                 Schedule Consultation
               </button>
@@ -278,7 +278,7 @@ export default function ExploreProperties() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Your full name"
                 />
               </div>
@@ -293,7 +293,7 @@ export default function ExploreProperties() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -308,7 +308,7 @@ export default function ExploreProperties() {
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="+234 123 456 7890"
                 />
               </div>
@@ -322,7 +322,7 @@ export default function ExploreProperties() {
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Tell us about your property needs..."
                 />
               </div>
@@ -337,7 +337,7 @@ export default function ExploreProperties() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors duration-300"
+                  className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
                 >
                   Send Message
                 </button>
@@ -386,7 +386,7 @@ export default function ExploreProperties() {
                     required
                     value={inspectionData.name}
                     onChange={(e) => setInspectionData({ ...inspectionData, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
                     placeholder="Your full name"
                   />
                 </div>
@@ -401,7 +401,7 @@ export default function ExploreProperties() {
                     required
                     value={inspectionData.email}
                     onChange={(e) => setInspectionData({ ...inspectionData, email: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -417,7 +417,7 @@ export default function ExploreProperties() {
                   required
                   value={inspectionData.phone}
                   onChange={(e) => setInspectionData({ ...inspectionData, phone: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
                   placeholder="+234 123 456 7890"
                 />
               </div>
@@ -436,7 +436,7 @@ export default function ExploreProperties() {
                     setShowPropertyDropdown(true);
                   }}
                   onFocus={() => setShowPropertyDropdown(true)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500 text-gray-900"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 text-gray-900"
                   placeholder="Search and select property"
                 />
                 
@@ -476,7 +476,7 @@ export default function ExploreProperties() {
                     required
                     value={inspectionData.preferredDate}
                     onChange={(e) => setInspectionData({ ...inspectionData, preferredDate: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -489,7 +489,7 @@ export default function ExploreProperties() {
                     required
                     value={inspectionData.preferredTime}
                     onChange={(e) => setInspectionData({ ...inspectionData, preferredTime: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select time</option>
                     <option value="9:00 AM">9:00 AM</option>
@@ -513,7 +513,7 @@ export default function ExploreProperties() {
                   rows={3}
                   value={inspectionData.message}
                   onChange={(e) => setInspectionData({ ...inspectionData, message: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent placeholder-gray-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500"
                   placeholder="Any specific areas you'd like to focus on during the inspection..."
                 />
               </div>
@@ -528,7 +528,7 @@ export default function ExploreProperties() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors duration-300"
+                  className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
                 >
                   Book Inspection
                 </button>
